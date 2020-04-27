@@ -4,14 +4,15 @@ namespace Banking
 {
     public abstract class Transaction : ITransaction
     {
-        private DateTime today;
-        private int amount;
+        protected readonly DateTime today;
+        protected readonly uint amount;
 
-        public int Amount => amount;
 
         public DateTime Date => today;
 
-        public Transaction(DateTime today, int amount)
+        public abstract int Amount { get; }
+
+        public Transaction(DateTime today, uint amount)
         {
             this.today = today;
             this.amount = amount;

@@ -4,7 +4,9 @@ namespace Banking
 {
     public class Deposit : Transaction
     {
-        public Deposit(DateTime today, int amount) : base(today, amount)
+        public override int Amount => (int)amount;
+
+        public Deposit(DateTime today, uint amount) : base(today, amount)
         {
         }
 

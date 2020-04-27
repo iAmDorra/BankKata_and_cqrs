@@ -14,7 +14,7 @@ namespace Banking.Tests
         public void ShouldReturnTheAmountOfTheTransactionWhenHavingOnlyOne()
         {
             ITransactions transactions = Substitute.For<ITransactions>();
-            int amount = 200;
+            uint amount = 200;
             var today = DateTime.Now;
             List<ITransaction> transactionCollection = new List<ITransaction>
             {
@@ -32,7 +32,7 @@ namespace Banking.Tests
         public void ShouldReturnTheSumOfAmountsOfTransactionsWhenHavingMany()
         {
             ITransactions transactions = Substitute.For<ITransactions>();
-            int amount = 200;
+            uint amount = 200;
             var today = DateTime.Now;
             List<ITransaction> transactionCollection = new List<ITransaction>
             {
@@ -51,7 +51,7 @@ namespace Banking.Tests
         public void ShouldReturnTheSumOfAmountsOfTransactionsWhenHavingManyforDifferentDates()
         {
             ITransactions transactions = Substitute.For<ITransactions>();
-            int amount = 200;
+            uint amount = 200;
             var today = DateTime.Now;
             List<ITransaction> transactionCollection = new List<ITransaction>
             {
@@ -64,6 +64,25 @@ namespace Banking.Tests
             Balance balance = bankingService.PrintBalance();
 
             Check.That(balance.DailyBalance(today)).IsEqualTo(200);
+        }
+
+        [TestMethod]
+        public void ShouldReturnTheSumOfAmountsOfTransactionsWhenHavingManyforDifferentTransactionTypes()
+        {
+            ITransactions transactions = Substitute.For<ITransactions>();
+            uint amount = 200;
+            var today = DateTime.Now;
+            List<ITransaction> transactionCollection = new List<ITransaction>
+            {
+                new Deposit(today, amount),
+                new Withdraw(today, amount),
+            };
+            transactions.GetAll().Returns(transactionCollection);
+            var bankingService = new BankingService(transactions);
+
+            Balance balance = bankingService.PrintBalance();
+
+            Check.That(balance.DailyBalance(today)).IsEqualTo(0);
         }
     }
 }

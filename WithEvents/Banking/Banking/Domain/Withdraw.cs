@@ -4,7 +4,9 @@ namespace Banking
 {
     public class Withdraw : Transaction
     {
-        public Withdraw(DateTime today, int amount) : base(today, amount)
+        public override int Amount => -((int)amount);
+
+        public Withdraw(DateTime today, uint amount) : base(today, amount)
         {
         }
 

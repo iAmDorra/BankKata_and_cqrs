@@ -13,7 +13,7 @@ namespace Banking.Tests
             DateTime today = DateTime.Now;
             var transactions = new Transactions();
             var bankingService = new BankingService(transactions);
-            int depositAmount = 200;
+            uint depositAmount = 200;
             bankingService.Deposit(depositAmount, today);
 
             var transactionExists = transactions.ContainsDeposit(depositAmount, today);
@@ -26,7 +26,7 @@ namespace Banking.Tests
             DateTime today = DateTime.Now;
             var transactions = new Transactions();
             var bankingService = new BankingService(transactions);
-            int depositAmount = 200;
+            uint depositAmount = 200;
             bankingService.Withdraw(depositAmount, today);
 
             var transactionExists = transactions.ContainsWithdraw(depositAmount, today);

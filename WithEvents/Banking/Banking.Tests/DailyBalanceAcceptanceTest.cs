@@ -13,9 +13,9 @@ namespace Banking.Tests
             DateTime today = DateTime.Now;
             Transactions transactions = NSubstitute.Substitute.For<Transactions>();
             var bankingService = new BankingService(transactions);
-            int depositAmount = 200;
+            uint depositAmount = 200;
             bankingService.Deposit(depositAmount, today);
-            int withDrawAmount = 100;
+            uint withDrawAmount = 100;
             bankingService.Withdraw(withDrawAmount, today);
             bankingService.Deposit(depositAmount, today);
 

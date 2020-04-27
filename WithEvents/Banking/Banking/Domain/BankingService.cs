@@ -13,13 +13,13 @@ namespace Banking
             this.transactions = transactions;
         }
 
-        public void Deposit(int depositAmount, DateTime today)
+        public void Deposit(uint depositAmount, DateTime today)
         {
             var deposit = new Deposit(today, depositAmount);
             transactions.Add(deposit);
         }
 
-        public void Withdraw(int withDrawAmount, DateTime today)
+        public void Withdraw(uint withDrawAmount, DateTime today)
         {
             var withdraw = new Withdraw(today, withDrawAmount);
             transactions.Add(withdraw);

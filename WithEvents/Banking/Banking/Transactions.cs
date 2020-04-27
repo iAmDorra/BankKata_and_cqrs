@@ -12,14 +12,14 @@ namespace Banking
             transactions.Add(transaction);
         }
 
-        public bool ContainsDeposit(int amount, DateTime today)
+        public bool ContainsDeposit(uint amount, DateTime today)
         {
             var transaction = new Deposit(today, amount);
             bool transcationExists = transactions.Contains(transaction);
             return transcationExists;
         }
 
-        public bool ContainsWithdraw(int amount, DateTime today)
+        public bool ContainsWithdraw(uint amount, DateTime today)
         {
             var transaction = new Withdraw(today, amount);
             bool transcationExists = transactions.Contains(transaction);
