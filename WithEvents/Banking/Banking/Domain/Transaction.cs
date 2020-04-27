@@ -7,6 +7,10 @@ namespace Banking
         private DateTime today;
         private int amount;
 
+        public int Amount => amount;
+
+        public DateTime Date => today;
+
         public Transaction(DateTime today, int amount)
         {
             this.today = today;

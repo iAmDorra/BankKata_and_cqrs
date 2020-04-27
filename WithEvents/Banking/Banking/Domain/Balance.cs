@@ -1,19 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Banking
 {
     public class Balance
     {
-        private int amount;
+        private Dictionary<DateTime, int> balance;
 
-        public Balance(int amount)
+        public Balance(Dictionary<DateTime, int> balance)
         {
-            this.amount = amount;
+            this.balance = balance;
         }
 
         public int DailyBalance(DateTime today)
         {
-            return amount;
+            return balance[today];
         }
     }
 }

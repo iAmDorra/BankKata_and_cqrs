@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Banking
 {
@@ -25,7 +27,14 @@ namespace Banking
 
         public Balance PrintBalance()
         {
-            return new Balance(200);
+            var transactions = this.transactions.GetAll();
+            Dictionary<DateTime, int> balance = new Dictionary<DateTime, int>();
+            var transactionsPerDay = transactions.GroupBy(t => t.Date);
+            foreach (var group in transactionsPerDay)
+            {
+                balance[group.Key] = group.Sum(t => t.Amount);
+            }
+            return new Balance(balance);
         }
     }
 }
