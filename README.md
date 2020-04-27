@@ -1,0 +1,2 @@
+# BankingKata
+Banking Kata
