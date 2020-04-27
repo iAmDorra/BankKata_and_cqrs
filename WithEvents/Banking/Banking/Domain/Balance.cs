@@ -12,9 +12,12 @@ namespace Banking
             this.balance = balance;
         }
 
-        public int DailyBalance(DateTime today)
+        public int DailyBalance(DateTime date)
         {
-            return balance[today];
+            if(balance.ContainsKey(date))
+                return balance[date];
+
+            return 0;
         }
     }
 }

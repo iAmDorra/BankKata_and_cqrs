@@ -24,5 +24,24 @@ namespace Banking.Tests
             int todayBalance = 300;
             Check.That(balance.DailyBalance(today)).IsEqualTo(todayBalance);
         }
+
+        [TestMethod]
+        public void ShouldReturnZeroWhenThereIsNoTransactionForTheRelatedDay()
+        {
+            DateTime today = DateTime.Now;
+            Transactions transactions = NSubstitute.Substitute.For<Transactions>();
+            var bankingService = new BankingService(transactions);
+            uint depositAmount = 200;
+            bankingService.Deposit(depositAmount, today);
+            uint withDrawAmount = 100;
+            bankingService.Withdraw(withDrawAmount, today);
+            bankingService.Deposit(depositAmount, today);
+
+            Balance balance = bankingService.PrintBalance();
+
+            int tomorrowBalance = 0;
+            DateTime tomorow = today.AddDays(1);
+            Check.That(balance.DailyBalance(tomorow)).IsEqualTo(tomorrowBalance);
+        }
     }
 }
