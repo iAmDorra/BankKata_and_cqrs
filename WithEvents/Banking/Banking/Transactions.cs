@@ -28,7 +28,7 @@ namespace Banking
 
         public List<ITransaction> GetAll()
         {
-            throw new NotImplementedException();
+            return new List<ITransaction>(transactions);
         }
     }
 }
