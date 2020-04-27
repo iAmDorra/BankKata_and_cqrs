@@ -25,5 +25,10 @@ namespace Banking
             bool transcationExists = transactions.Contains(transaction);
             return transcationExists;
         }
+
+        public List<ITransaction> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

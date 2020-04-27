@@ -2,7 +2,7 @@
 
 namespace Banking
 {
-    internal abstract class Transaction : ITransaction
+    public abstract class Transaction : ITransaction
     {
         private DateTime today;
         private int amount;

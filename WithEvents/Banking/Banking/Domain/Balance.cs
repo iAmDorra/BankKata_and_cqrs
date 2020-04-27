@@ -4,9 +4,16 @@ namespace Banking
 {
     public class Balance
     {
-        public object DailyBalance(DateTime today)
+        private int amount;
+
+        public Balance(int amount)
         {
-            throw new NotImplementedException();
+            this.amount = amount;
+        }
+
+        public int DailyBalance(DateTime today)
+        {
+            return amount;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Banking
 {
@@ -6,5 +7,6 @@ namespace Banking
     {
         bool ContainsDeposit(int depositAmount, DateTime today);
         void Add(ITransaction transaction);
+        List<ITransaction> GetAll();
     }
 }

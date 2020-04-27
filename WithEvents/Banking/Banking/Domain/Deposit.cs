@@ -2,7 +2,7 @@
 
 namespace Banking
 {
-    internal class Deposit : Transaction
+    public class Deposit : Transaction
     {
         public Deposit(DateTime today, int amount) : base(today, amount)
         {

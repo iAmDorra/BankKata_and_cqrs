@@ -2,7 +2,7 @@
 
 namespace Banking
 {
-    internal class Withdraw : Transaction
+    public class Withdraw : Transaction
     {
         public Withdraw(DateTime today, int amount) : base(today, amount)
         {
