@@ -2,7 +2,7 @@
 
 namespace Banking
 {
-    internal class Transaction
+    internal abstract class Transaction : ITransaction
     {
         private DateTime today;
         private int amount;
@@ -29,8 +29,10 @@ namespace Banking
                 return false;
             }
 
-            return true;
+            return Equals(transaction);
         }
+
+        protected abstract bool Equals(Transaction transaction);
 
         // override object.GetHashCode
         public override int GetHashCode()

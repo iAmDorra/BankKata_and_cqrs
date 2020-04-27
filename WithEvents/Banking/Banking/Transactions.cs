@@ -5,16 +5,23 @@ namespace Banking
 {
     public class Transactions : ITransactions
     {
-        private List<Transaction> transactions = new List<Transaction>();
+        private List<ITransaction> transactions = new List<ITransaction>();
 
-        public void Add(int amount, DateTime today)
+        public void Add(ITransaction transaction)
         {
-            transactions.Add(new Transaction(today, amount));
+            transactions.Add(transaction);
         }
 
-        public bool ContainsTransaction(int amount, DateTime today)
+        public bool ContainsDeposit(int amount, DateTime today)
         {
-            Transaction transaction = new Transaction(today, amount);
+            var transaction = new Deposit(today, amount);
+            bool transcationExists = transactions.Contains(transaction);
+            return transcationExists;
+        }
+
+        public bool ContainsWithdraw(int amount, DateTime today)
+        {
+            var transaction = new Withdraw(today, amount);
             bool transcationExists = transactions.Contains(transaction);
             return transcationExists;
         }
