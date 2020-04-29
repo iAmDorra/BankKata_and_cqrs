@@ -10,5 +10,6 @@ namespace Banking
         void Add(ITransaction transaction);
         List<ITransaction> GetAll();
         Balance GetBalance();
+        Balance RetreiveBalance();
     }
 }

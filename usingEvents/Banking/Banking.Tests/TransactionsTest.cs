@@ -99,5 +99,51 @@ namespace Banking.Tests
             var transactionEventArgs = eventArgs as TransactionEventArgs;
             Check.That(transactionEventArgs.Transaction).IsEqualTo(deposit);
         }
+
+        [TestMethod]
+        public void ShouldHandleTheAddEventToCalculateTheBalanceWhenAddingADeposit()
+        {
+            ITransactions transactions = new Transactions();
+
+            uint depositAmount = 10;
+            DateTime today = default;
+            Deposit deposit = new Deposit(today, depositAmount);
+            transactions.Add(deposit);
+
+            Balance balance = transactions.RetreiveBalance();
+
+            Check.That(balance.DailyBalance(today)).IsEqualTo(depositAmount);
+        }
+
+        [TestMethod]
+        public void ShouldHandleTheAddEventToCalculateTheBalanceWhenAddingTwoDeposit()
+        {
+            ITransactions transactions = new Transactions();
+
+            uint depositAmount = 10;
+            DateTime today = default;
+            Deposit deposit = new Deposit(today, depositAmount);
+            transactions.Add(deposit);
+            transactions.Add(deposit);
+
+            Balance balance = transactions.RetreiveBalance();
+
+            Check.That(balance.DailyBalance(today)).IsEqualTo(20);
+        }
+
+        [TestMethod]
+        public void ShouldHandleTheAddEventToCalculateTheBalanceWhenAddingTwoDepositInDifferentDates()
+        {
+            ITransactions transactions = new Transactions();
+
+            uint depositAmount = 10;
+            DateTime today = default;
+            transactions.Add(new Deposit(today, depositAmount));
+            transactions.Add(new Deposit(today.AddDays(1), depositAmount));
+
+            Balance balance = transactions.RetreiveBalance();
+
+            Check.That(balance.DailyBalance(today)).IsEqualTo(10);
+        }
     }
 }

@@ -19,5 +19,17 @@ namespace Banking
 
             return 0;
         }
+
+        internal void UpdateDailyAmount(DateTime date, int amount)
+        {
+            if (balance.ContainsKey(date))
+            {
+                balance[date] += amount;
+            }
+            else
+            {
+                balance[date] = amount;
+            }
+        }
     }
 }
