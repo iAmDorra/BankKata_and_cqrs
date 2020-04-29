@@ -145,5 +145,35 @@ namespace Banking.Tests
 
             Check.That(balance.DailyBalance(today)).IsEqualTo(10);
         }
+
+        [TestMethod]
+        public void ShouldHandleTheAddEventToCalculateTheBalanceWhenAddingOneDepositAndOneWithdrawOnSameDate()
+        {
+            ITransactions transactions = new Transactions();
+
+            uint depositAmount = 10;
+            DateTime today = default;
+            transactions.Add(new Deposit(today, depositAmount));
+            transactions.Add(new Withdraw(today, depositAmount));
+
+            Balance balance = transactions.RetreiveBalance();
+
+            Check.That(balance.DailyBalance(today)).IsEqualTo(0);
+        }
+
+        [TestMethod]
+        public void ShouldHandleTheAddEventToCalculateTheBalanceWhenAddingOneDepositAndOneWithdrawOnDifferentDates()
+        {
+            ITransactions transactions = new Transactions();
+
+            uint depositAmount = 10;
+            DateTime today = default;
+            transactions.Add(new Deposit(today, depositAmount));
+            transactions.Add(new Withdraw(today.AddDays(1), depositAmount));
+
+            Balance balance = transactions.RetreiveBalance();
+
+            Check.That(balance.DailyBalance(today)).IsEqualTo(10);
+        }
     }
 }
