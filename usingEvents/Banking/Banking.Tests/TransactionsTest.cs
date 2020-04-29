@@ -62,5 +62,19 @@ namespace Banking.Tests
 
             Check.That(balance.DailyBalance(today)).IsEqualTo(0);
         }
+
+        [TestMethod]
+        public void ShouldRaiseAnEventWhenAddingATransaction()
+        {
+            var transactions = new Transactions();
+            uint depositAmount = 10;
+            DateTime today = default;
+            int callNumber = 0;
+            transactions.AddEvent += (sender, eventArgument) => { callNumber++; };
+
+            transactions.Add(new Deposit(today, depositAmount));
+
+            Check.That(callNumber).IsEqualTo(1);
+        }
     }
 }
