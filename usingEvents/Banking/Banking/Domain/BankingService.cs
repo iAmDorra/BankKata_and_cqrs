@@ -25,7 +25,7 @@ namespace Banking
 
         public Balance PrintBalance()
         {
-            return this.transactions.GetBalance();
+            return this.transactions.RetreiveBalance();
         }
 
     }

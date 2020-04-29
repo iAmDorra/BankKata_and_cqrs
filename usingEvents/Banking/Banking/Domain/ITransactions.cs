@@ -8,8 +8,6 @@ namespace Banking
         bool ContainsDeposit(uint amount, DateTime today);
         bool ContainsWithdraw(uint amount, DateTime today);
         void Add(ITransaction transaction);
-        List<ITransaction> GetAll();
-        Balance GetBalance();
         Balance RetreiveBalance();
     }
 }

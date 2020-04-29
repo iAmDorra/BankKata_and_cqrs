@@ -16,7 +16,7 @@ namespace Banking.Tests
 
             Balance balance = bankingService.PrintBalance();
 
-            transactions.Received().GetBalance();
+            transactions.Received().RetreiveBalance();
         }
 
     }
