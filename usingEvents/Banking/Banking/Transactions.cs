@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Banking
 {
@@ -29,6 +30,18 @@ namespace Banking
         public List<ITransaction> GetAll()
         {
             return new List<ITransaction>(transactions);
+        }
+
+        public Balance GetBalance()
+        {
+            var transactions = this.GetAll();
+            Dictionary<DateTime, int> balance = new Dictionary<DateTime, int>();
+            var transactionsPerDay = transactions.GroupBy(t => t.Date);
+            foreach (var group in transactionsPerDay)
+            {
+                balance[group.Key] = group.Sum(t => t.Amount);
+            }
+            return new Balance(balance);
         }
     }
 }

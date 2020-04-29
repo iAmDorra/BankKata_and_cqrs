@@ -9,5 +9,6 @@ namespace Banking
         bool ContainsWithdraw(uint amount, DateTime today);
         void Add(ITransaction transaction);
         List<ITransaction> GetAll();
+        Balance GetBalance();
     }
 }
