@@ -76,5 +76,28 @@ namespace Banking.Tests
 
             Check.That(callNumber).IsEqualTo(1);
         }
+
+        [TestMethod]
+        public void ShouldRaiseAnEventWithTheAddedTransactionAndTheSenderWhenAddingATransaction()
+        {
+            var transactions = new Transactions();
+            object eventSender = null;
+            EventArgs eventArgs = null;
+            transactions.AddEvent += (sender, eventArgument) =>
+            {
+                eventSender = sender;
+                eventArgs = eventArgument;
+            };
+
+            uint depositAmount = 10;
+            DateTime today = default;
+            Deposit deposit = new Deposit(today, depositAmount);
+            transactions.Add(deposit);
+
+            Check.That(eventSender).IsEqualTo(transactions);
+            Check.That(eventArgs).IsInstanceOf<TransactionEventArgs>();
+            var transactionEventArgs = eventArgs as TransactionEventArgs;
+            Check.That(transactionEventArgs.Transaction).IsEqualTo(deposit);
+        }
     }
 }
