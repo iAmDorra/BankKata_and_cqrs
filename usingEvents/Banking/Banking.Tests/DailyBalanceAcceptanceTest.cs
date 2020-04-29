@@ -11,8 +11,9 @@ namespace Banking.Tests
         public void ShouldCalculateTheAmountOfTheDailyBalanceFromDepositsAndWithdraws()
         {
             DateTime today = DateTime.Now;
-            Transactions transactions = NSubstitute.Substitute.For<Transactions>();
-            var bankingService = new BankingService(transactions);
+            Transactions transactions = new Transactions();
+            IBalanceRetriever balanceRetriever = new BalanceRetriever(transactions);
+            var bankingService = new BankingService(transactions, balanceRetriever);
             uint depositAmount = 200;
             bankingService.Deposit(depositAmount, today);
             uint withDrawAmount = 100;
@@ -29,8 +30,9 @@ namespace Banking.Tests
         public void ShouldReturnZeroWhenThereIsNoTransactionForTheRelatedDay()
         {
             DateTime today = DateTime.Now;
-            Transactions transactions = NSubstitute.Substitute.For<Transactions>();
-            var bankingService = new BankingService(transactions);
+            Transactions transactions = new Transactions();
+            IBalanceRetriever balanceRetriever = new BalanceRetriever(transactions);
+            var bankingService = new BankingService(transactions, balanceRetriever);
             uint depositAmount = 200;
             bankingService.Deposit(depositAmount, today);
             uint withDrawAmount = 100;

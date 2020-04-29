@@ -7,19 +7,6 @@ namespace Banking
     public class Transactions : ITransactions
     {
         private List<ITransaction> transactions = new List<ITransaction>();
-        private Balance balance;
-
-        public Transactions()
-        {
-            this.AddEvent += CalculateBalance;
-            this.balance = new Balance(new Dictionary<DateTime, int>());
-        }
-
-        private void CalculateBalance(object sender, EventArgs e)
-        {
-            ITransaction transaction = (e as TransactionEventArgs).Transaction;
-            this.balance.UpdateDailyAmount(transaction.Date, transaction.Amount);
-        }
 
         public event EventHandler AddEvent;
 
@@ -27,11 +14,6 @@ namespace Banking
         {
             transactions.Add(transaction);
             AddEvent?.Invoke(this, new TransactionEventArgs(transaction));
-        }
-
-        public Balance RetreiveBalance()
-        {
-            return this.balance;
         }
 
         public bool ContainsDeposit(uint amount, DateTime today)

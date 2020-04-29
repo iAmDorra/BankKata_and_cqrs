@@ -12,11 +12,12 @@ namespace Banking.Tests
         public void ShouldCallTransactionsToGetBalanceWhenPrintingIt()
         {
             ITransactions transactions = Substitute.For<ITransactions>();
-            var bankingService = new BankingService(transactions);
+            IBalanceRetriever balanceRetriever = Substitute.For<IBalanceRetriever>();
+            var bankingService = new BankingService(transactions, balanceRetriever);
 
             Balance balance = bankingService.PrintBalance();
 
-            transactions.Received().RetreiveBalance();
+            balanceRetriever.Received().RetrieveBalance();
         }
 
     }

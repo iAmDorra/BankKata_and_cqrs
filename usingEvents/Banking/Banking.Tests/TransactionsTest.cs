@@ -48,13 +48,14 @@ namespace Banking.Tests
         public void ShouldHandleTheAddEventToCalculateTheBalanceWhenAddingADeposit()
         {
             ITransactions transactions = new Transactions();
+            var balanceRetriever = new BalanceRetriever(transactions);
 
             uint depositAmount = 10;
             DateTime today = default;
             Deposit deposit = new Deposit(today, depositAmount);
             transactions.Add(deposit);
 
-            Balance balance = transactions.RetreiveBalance();
+            Balance balance = balanceRetriever.RetrieveBalance();
 
             Check.That(balance.DailyBalance(today)).IsEqualTo(depositAmount);
         }
@@ -63,6 +64,7 @@ namespace Banking.Tests
         public void ShouldHandleTheAddEventToCalculateTheBalanceWhenAddingTwoDeposit()
         {
             ITransactions transactions = new Transactions();
+            var balanceRetriever = new BalanceRetriever(transactions);
 
             uint depositAmount = 10;
             DateTime today = default;
@@ -70,7 +72,7 @@ namespace Banking.Tests
             transactions.Add(deposit);
             transactions.Add(deposit);
 
-            Balance balance = transactions.RetreiveBalance();
+            Balance balance = balanceRetriever.RetrieveBalance();
 
             Check.That(balance.DailyBalance(today)).IsEqualTo(20);
         }
@@ -79,13 +81,14 @@ namespace Banking.Tests
         public void ShouldHandleTheAddEventToCalculateTheBalanceWhenAddingTwoDepositInDifferentDates()
         {
             ITransactions transactions = new Transactions();
+            var balanceRetriever = new BalanceRetriever(transactions);
 
             uint depositAmount = 10;
             DateTime today = default;
             transactions.Add(new Deposit(today, depositAmount));
             transactions.Add(new Deposit(today.AddDays(1), depositAmount));
 
-            Balance balance = transactions.RetreiveBalance();
+            Balance balance = balanceRetriever.RetrieveBalance();
 
             Check.That(balance.DailyBalance(today)).IsEqualTo(10);
         }
@@ -94,13 +97,14 @@ namespace Banking.Tests
         public void ShouldHandleTheAddEventToCalculateTheBalanceWhenAddingOneDepositAndOneWithdrawOnSameDate()
         {
             ITransactions transactions = new Transactions();
+            var balanceRetriever = new BalanceRetriever(transactions);
 
             uint depositAmount = 10;
             DateTime today = default;
             transactions.Add(new Deposit(today, depositAmount));
             transactions.Add(new Withdraw(today, depositAmount));
 
-            Balance balance = transactions.RetreiveBalance();
+            Balance balance = balanceRetriever.RetrieveBalance();
 
             Check.That(balance.DailyBalance(today)).IsEqualTo(0);
         }
@@ -109,13 +113,14 @@ namespace Banking.Tests
         public void ShouldHandleTheAddEventToCalculateTheBalanceWhenAddingOneDepositAndOneWithdrawOnDifferentDates()
         {
             ITransactions transactions = new Transactions();
+            var balanceRetriever = new BalanceRetriever(transactions);
 
             uint depositAmount = 10;
             DateTime today = default;
             transactions.Add(new Deposit(today, depositAmount));
             transactions.Add(new Withdraw(today.AddDays(1), depositAmount));
 
-            Balance balance = transactions.RetreiveBalance();
+            Balance balance = balanceRetriever.RetrieveBalance();
 
             Check.That(balance.DailyBalance(today)).IsEqualTo(10);
         }

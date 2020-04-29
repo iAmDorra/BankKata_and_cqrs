@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NFluent;
+using NSubstitute;
 using System;
 
 namespace Banking.Tests
@@ -12,7 +13,8 @@ namespace Banking.Tests
         {
             DateTime today = DateTime.Now;
             var transactions = new Transactions();
-            var bankingService = new BankingService(transactions);
+            IBalanceRetriever balanceRetriever = Substitute.For<IBalanceRetriever>();
+            var bankingService = new BankingService(transactions, balanceRetriever);
             uint depositAmount = 200;
             bankingService.Deposit(depositAmount, today);
 
@@ -25,7 +27,8 @@ namespace Banking.Tests
         {
             DateTime today = DateTime.Now;
             var transactions = new Transactions();
-            var bankingService = new BankingService(transactions);
+            IBalanceRetriever balanceRetriever = Substitute.For<IBalanceRetriever>();
+            var bankingService = new BankingService(transactions, balanceRetriever);
             uint depositAmount = 200;
             bankingService.Withdraw(depositAmount, today);
 
