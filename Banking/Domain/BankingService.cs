@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Banking
 {
@@ -13,7 +15,8 @@ namespace Banking
 
         public void Deposit(uint depositAmount, DateTime today)
         {
-            throw new NotImplementedException();
+            var deposit = new Deposit(today, depositAmount);
+            transactions.Add(deposit);
         }
 
         public void Withdraw(uint withDrawAmount, DateTime dateTime)
