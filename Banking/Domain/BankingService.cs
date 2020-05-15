@@ -27,7 +27,7 @@ namespace Banking
 
         public Balance PrintBalance()
         {
-            throw new NotImplementedException();
+            return new Balance();
         }
     }
 }

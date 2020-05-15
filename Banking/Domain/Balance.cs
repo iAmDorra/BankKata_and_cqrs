@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Banking
 {
     public class Balance
     {
-        public object GetAccountStatements()
+        public List<AccountStatement> GetAccountStatements()
         {
-            throw new NotImplementedException();
+            return new List<AccountStatement>();
         }
     }
 }
