@@ -24,7 +24,7 @@ namespace Banking.Tests
         }
 
         [TestMethod]
-        public void ShouldReturnOneStatementWhenHavingOneTransaction()
+        public void ShouldReturnOneStatementWhenHavingOneDepositTransaction()
         {
             DateTime today = DateTime.Now;
             ITransactions transactions = Substitute.For<ITransactions>();
@@ -39,6 +39,24 @@ namespace Banking.Tests
 
             Check.That(balance.GetAccountStatements())
                 .ContainsExactly(new AccountStatement(today, 100, 100));
+        }
+
+        [TestMethod]
+        public void ShouldReturnOneStatementWhenHavingOneWithdrawTransaction()
+        {
+            DateTime today = DateTime.Now;
+            ITransactions transactions = Substitute.For<ITransactions>();
+            List<ITransaction> noTransactions = new List<ITransaction>
+            {
+                new Withdraw(today, 100)
+            };
+            transactions.GetAll().Returns(noTransactions);
+            var bankingService = new BankingService(transactions);
+
+            var balance = bankingService.PrintBalance();
+
+            Check.That(balance.GetAccountStatements())
+                .ContainsExactly(new AccountStatement(today, -100, -100));
         }
     }
 }
