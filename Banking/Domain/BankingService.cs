@@ -21,7 +21,8 @@ namespace Banking
 
         public void Withdraw(uint withDrawAmount, DateTime dateTime)
         {
-            throw new NotImplementedException();
+            var withdraw = new Withdraw(dateTime, withDrawAmount);
+            transactions.Add(withdraw);
         }
 
         public Balance PrintBalance()

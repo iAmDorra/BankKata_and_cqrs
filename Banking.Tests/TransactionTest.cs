@@ -20,5 +20,17 @@ namespace Banking.Tests
             transactions.Received().Add(Arg.Is<ITransaction>(t => t.GetType() == typeof(Deposit)));
         }
 
+        [TestMethod]
+        public void ShouldAddWithdrawIntoTransactions()
+        {
+            DateTime today = DateTime.Now;
+            ITransactions transactions = Substitute.For<ITransactions>();
+            var bankingService = new BankingService(transactions);
+            uint withdrawAmount = 200;
+
+            bankingService.Withdraw(withdrawAmount, today);
+
+            transactions.Received().Add(Arg.Is<ITransaction>(t => t.GetType() == typeof(Withdraw)));
+        }      
     }
 }
