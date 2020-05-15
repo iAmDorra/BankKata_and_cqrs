@@ -27,7 +27,15 @@ namespace Banking
 
         public Balance PrintBalance()
         {
-            return new Balance();
+            var transactions = this.transactions.GetAll();
+            var transaction = transactions.FirstOrDefault();
+            var statements = new List<AccountStatement>();
+            if (transaction != null)
+            {
+                statements.Add(new AccountStatement(transaction.Date, transaction.Amount, transaction.Amount));
+            }
+
+            return new Balance(statements);
         }
     }
 }
