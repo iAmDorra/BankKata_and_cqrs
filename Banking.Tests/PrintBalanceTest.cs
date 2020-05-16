@@ -121,5 +121,30 @@ namespace Banking.Tests
                 new AccountStatement(today, -100, -100),
                 new AccountStatement(today, -100, -200));
         }
+
+        [TestMethod]
+        public void ShouldReturnStatementsInDescendingDateOrderWhenPrintingBalance()
+        {
+            DateTime today = DateTime.Now;
+            ITransactions transactions = Substitute.For<ITransactions>();
+            List<ITransaction> noTransactions = new List<ITransaction>
+            {
+                new Deposit(today, 200),
+                new Withdraw(today.AddDays(1), 100),
+                new Deposit(today.AddDays(2), 100),
+            };
+            transactions.GetAll().Returns(noTransactions);
+            var bankingService = new BankingService(transactions);
+
+            var balance = bankingService.PrintBalance();
+
+            var expectedStatements = new List<AccountStatement>
+            {
+                new AccountStatement(today.AddDays(2), 100, 200),
+                new AccountStatement(today.AddDays(1), -100, 100),
+                new AccountStatement(today, 200, 200)
+            };
+            Check.That(balance.GetAccountStatements()).IsEqualTo(expectedStatements);
+        }
     }
 }

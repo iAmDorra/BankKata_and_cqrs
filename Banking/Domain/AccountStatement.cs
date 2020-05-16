@@ -14,5 +14,7 @@ namespace Banking
             this.amount = amount;
             this.balance = balance;
         }
+
+        public DateTime Date => date;
     }
 }

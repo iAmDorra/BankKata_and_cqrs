@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Banking
 {
@@ -13,7 +14,7 @@ namespace Banking
 
         public List<AccountStatement> GetAccountStatements()
         {
-            return new List<AccountStatement>(statements);
+            return new List<AccountStatement>(statements.OrderByDescending(t => t.Date));
         }
     }
 }
