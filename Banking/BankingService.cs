@@ -27,6 +27,13 @@ namespace Banking
 
         public Balance PrintBalance()
         {
+            List<AccountStatement> statements = GetStatements();
+
+            return new Balance(statements);
+        }
+
+        private List<AccountStatement> GetStatements()
+        {
             var transactions = this.transactions.GetAll();
             var statements = new List<AccountStatement>();
 
@@ -40,7 +47,7 @@ namespace Banking
                 }
             }
 
-            return new Balance(statements);
+            return statements;
         }
     }
 }
