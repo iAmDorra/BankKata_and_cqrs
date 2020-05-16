@@ -13,8 +13,9 @@ namespace Banking.Tests
         public void ShouldReturnAccountStatementsWithDepositsAndWithdrawsWhenPrintingBalance()
         {
             DateTime today = DateTime.Now;
-            var transactions = new Transactions();
-            var bankingService = new BankingService(transactions);
+            ITransactions transactions = new Transactions();
+            IBalanceRetriever balanceRetriever = new BalanceRetriever(transactions);
+            var bankingService = new BankingService(transactions, balanceRetriever);
             uint depositAmount = 200;
             bankingService.Deposit(depositAmount, today);
             uint withDrawAmount = 100;

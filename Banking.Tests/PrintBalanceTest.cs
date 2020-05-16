@@ -15,8 +15,9 @@ namespace Banking.Tests
             DateTime today = DateTime.Now;
             ITransactions transactions = Substitute.For<ITransactions>();
             List<AccountStatement> noStatements = new List<AccountStatement>();
-            transactions.GetStatements().Returns(noStatements);
-            var bankingService = new BankingService(transactions);
+            IBalanceRetriever balanceRetriever = Substitute.For<IBalanceRetriever>();
+            balanceRetriever.GetStatements().Returns(noStatements);
+            var bankingService = new BankingService(transactions, balanceRetriever);
 
             var balance = bankingService.PrintBalance();
 
@@ -32,8 +33,9 @@ namespace Banking.Tests
             {
                 new AccountStatement(today, 100, 100)
             };
-            transactions.GetStatements().Returns(statements);
-            var bankingService = new BankingService(transactions);
+            IBalanceRetriever balanceRetriever = Substitute.For<IBalanceRetriever>();
+            balanceRetriever.GetStatements().Returns(statements);
+            var bankingService = new BankingService(transactions, balanceRetriever);
 
             var balance = bankingService.PrintBalance();
 
@@ -50,8 +52,9 @@ namespace Banking.Tests
             {
                 new AccountStatement(today, -100, -100)
             };
-            transactions.GetStatements().Returns(statements);
-            var bankingService = new BankingService(transactions);
+            IBalanceRetriever balanceRetriever = Substitute.For<IBalanceRetriever>();
+            balanceRetriever.GetStatements().Returns(statements);
+            var bankingService = new BankingService(transactions, balanceRetriever);
 
             var balance = bankingService.PrintBalance();
 
@@ -69,8 +72,9 @@ namespace Banking.Tests
                 new AccountStatement(today, 100, 100),
                 new AccountStatement(today, 100, 200)
             };
-            transactions.GetStatements().Returns(statements);
-            var bankingService = new BankingService(transactions);
+            IBalanceRetriever balanceRetriever = Substitute.For<IBalanceRetriever>();
+            balanceRetriever.GetStatements().Returns(statements);
+            var bankingService = new BankingService(transactions, balanceRetriever);
 
             var balance = bankingService.PrintBalance();
 
@@ -90,8 +94,9 @@ namespace Banking.Tests
                 new AccountStatement(today, 100, 100),
                 new AccountStatement(today, -100, 0)
             };
-            transactions.GetStatements().Returns(statements);
-            var bankingService = new BankingService(transactions);
+            IBalanceRetriever balanceRetriever = Substitute.For<IBalanceRetriever>();
+            balanceRetriever.GetStatements().Returns(statements);
+            var bankingService = new BankingService(transactions, balanceRetriever);
 
             var balance = bankingService.PrintBalance();
 
@@ -111,8 +116,9 @@ namespace Banking.Tests
                 new AccountStatement(today, -100, -100),
                 new AccountStatement(today, -100, -200)
             };
-            transactions.GetStatements().Returns(statements);
-            var bankingService = new BankingService(transactions);
+            IBalanceRetriever balanceRetriever = Substitute.For<IBalanceRetriever>();
+            balanceRetriever.GetStatements().Returns(statements);
+            var bankingService = new BankingService(transactions, balanceRetriever);
 
             var balance = bankingService.PrintBalance();
 
@@ -133,8 +139,9 @@ namespace Banking.Tests
                 new AccountStatement(today.AddDays(1), -100, 100),
                 new AccountStatement(today, 200, 200)
             };
-            transactions.GetStatements().Returns(statements);
-            var bankingService = new BankingService(transactions);
+            IBalanceRetriever balanceRetriever = Substitute.For<IBalanceRetriever>();
+            balanceRetriever.GetStatements().Returns(statements);
+            var bankingService = new BankingService(transactions, balanceRetriever);
 
             var balance = bankingService.PrintBalance();
 

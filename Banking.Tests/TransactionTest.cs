@@ -12,7 +12,8 @@ namespace Banking.Tests
         {
             DateTime today = DateTime.Now;
             ITransactions transactions = Substitute.For<ITransactions>();
-            var bankingService = new BankingService(transactions);
+            IBalanceRetriever balanceRetriever = Substitute.For<IBalanceRetriever>();
+            var bankingService = new BankingService(transactions, balanceRetriever);
             uint depositAmount = 200;
 
             bankingService.Deposit(depositAmount, today);
@@ -25,12 +26,13 @@ namespace Banking.Tests
         {
             DateTime today = DateTime.Now;
             ITransactions transactions = Substitute.For<ITransactions>();
-            var bankingService = new BankingService(transactions);
+            IBalanceRetriever balanceRetriever = Substitute.For<IBalanceRetriever>();
+            var bankingService = new BankingService(transactions, balanceRetriever);
             uint withdrawAmount = 200;
 
             bankingService.Withdraw(withdrawAmount, today);
 
             transactions.Received().Add(Arg.Is<ITransaction>(t => t.GetType() == typeof(Withdraw)));
-        }      
+        }
     }
 }

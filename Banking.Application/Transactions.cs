@@ -15,23 +15,5 @@ namespace Banking.Application
         {
             return new List<ITransaction>(transactions);
         }
-
-        public List<AccountStatement> GetStatements()
-        {
-            var transactions = this.GetAll();
-            var statements = new List<AccountStatement>();
-
-            var balance = 0;
-            foreach (var transaction in transactions)
-            {
-                if (transaction != null)
-                {
-                    balance += transaction.Amount;
-                    statements.Add(new AccountStatement(transaction.Date, transaction.Amount, balance));
-                }
-            }
-
-            return statements;
-        }
     }
 }
