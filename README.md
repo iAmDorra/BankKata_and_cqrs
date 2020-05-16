@@ -6,7 +6,7 @@
 **Given** a client makes a *deposit* of *100* on *01/01/2020*  
 **And** a *deposit* of *200* on *02/01/2020*  
 **And** a *withdraw* of *50* on *03/01/2020*  
-**When** he print his account statement  
+**When** he prints his account statement  
 **Then** he would see:  
 |**Date**|**Amount**|**Balance**|  
 | ------ | -------- | --------- |
