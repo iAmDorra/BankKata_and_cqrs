@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Banking
+namespace Banking.Application
 {
     public class Transactions : ITransactions
     {

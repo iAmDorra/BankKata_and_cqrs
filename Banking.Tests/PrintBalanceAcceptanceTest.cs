@@ -1,3 +1,4 @@
+using Banking.Application;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NFluent;
 using System;
