@@ -27,27 +27,9 @@ namespace Banking
 
         public Balance PrintBalance()
         {
-            List<AccountStatement> statements = GetStatements();
+            List<AccountStatement> statements = this.transactions.GetStatements();
 
             return new Balance(statements);
-        }
-
-        private List<AccountStatement> GetStatements()
-        {
-            var transactions = this.transactions.GetAll();
-            var statements = new List<AccountStatement>();
-
-            var balance = 0;
-            foreach (var transaction in transactions)
-            {
-                if (transaction != null)
-                {
-                    balance += transaction.Amount;
-                    statements.Add(new AccountStatement(transaction.Date, transaction.Amount, balance));
-                }
-            }
-
-            return statements;
         }
     }
 }

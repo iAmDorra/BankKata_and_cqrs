@@ -14,8 +14,8 @@ namespace Banking.Tests
         {
             DateTime today = DateTime.Now;
             ITransactions transactions = Substitute.For<ITransactions>();
-            List<ITransaction> noTransactions = new List<ITransaction>();
-            transactions.GetAll().Returns(noTransactions);
+            List<AccountStatement> noStatements = new List<AccountStatement>();
+            transactions.GetStatements().Returns(noStatements);
             var bankingService = new BankingService(transactions);
 
             var balance = bankingService.PrintBalance();
@@ -28,11 +28,11 @@ namespace Banking.Tests
         {
             DateTime today = DateTime.Now;
             ITransactions transactions = Substitute.For<ITransactions>();
-            List<ITransaction> noTransactions = new List<ITransaction>
+            List<AccountStatement> statements = new List<AccountStatement>
             {
-                new Deposit(today, 100)
+                new AccountStatement(today, 100, 100)
             };
-            transactions.GetAll().Returns(noTransactions);
+            transactions.GetStatements().Returns(statements);
             var bankingService = new BankingService(transactions);
 
             var balance = bankingService.PrintBalance();
@@ -46,11 +46,11 @@ namespace Banking.Tests
         {
             DateTime today = DateTime.Now;
             ITransactions transactions = Substitute.For<ITransactions>();
-            List<ITransaction> noTransactions = new List<ITransaction>
+            List<AccountStatement> statements = new List<AccountStatement>
             {
-                new Withdraw(today, 100)
+                new AccountStatement(today, -100, -100)
             };
-            transactions.GetAll().Returns(noTransactions);
+            transactions.GetStatements().Returns(statements);
             var bankingService = new BankingService(transactions);
 
             var balance = bankingService.PrintBalance();
@@ -64,12 +64,12 @@ namespace Banking.Tests
         {
             DateTime today = DateTime.Now;
             ITransactions transactions = Substitute.For<ITransactions>();
-            List<ITransaction> noTransactions = new List<ITransaction>
-             {
-                new Deposit(today, 100),
-                new Deposit(today, 100)
+            List<AccountStatement> statements = new List<AccountStatement>
+            {
+                new AccountStatement(today, 100, 100),
+                new AccountStatement(today, 100, 200)
             };
-            transactions.GetAll().Returns(noTransactions);
+            transactions.GetStatements().Returns(statements);
             var bankingService = new BankingService(transactions);
 
             var balance = bankingService.PrintBalance();
@@ -85,12 +85,12 @@ namespace Banking.Tests
         {
             DateTime today = DateTime.Now;
             ITransactions transactions = Substitute.For<ITransactions>();
-            List<ITransaction> noTransactions = new List<ITransaction>
+            List<AccountStatement> statements = new List<AccountStatement>
             {
-                new Deposit(today, 100),
-                new Withdraw(today, 100)
+                new AccountStatement(today, 100, 100),
+                new AccountStatement(today, -100, 0)
             };
-            transactions.GetAll().Returns(noTransactions);
+            transactions.GetStatements().Returns(statements);
             var bankingService = new BankingService(transactions);
 
             var balance = bankingService.PrintBalance();
@@ -106,12 +106,12 @@ namespace Banking.Tests
         {
             DateTime today = DateTime.Now;
             ITransactions transactions = Substitute.For<ITransactions>();
-            List<ITransaction> noTransactions = new List<ITransaction>
+            List<AccountStatement> statements = new List<AccountStatement>
             {
-                new Withdraw(today, 100),
-                new Withdraw(today, 100)
+                new AccountStatement(today, -100, -100),
+                new AccountStatement(today, -100, -200)
             };
-            transactions.GetAll().Returns(noTransactions);
+            transactions.GetStatements().Returns(statements);
             var bankingService = new BankingService(transactions);
 
             var balance = bankingService.PrintBalance();
@@ -127,13 +127,13 @@ namespace Banking.Tests
         {
             DateTime today = DateTime.Now;
             ITransactions transactions = Substitute.For<ITransactions>();
-            List<ITransaction> noTransactions = new List<ITransaction>
+            List<AccountStatement> statements = new List<AccountStatement>
             {
-                new Deposit(today, 200),
-                new Withdraw(today.AddDays(1), 100),
-                new Deposit(today.AddDays(2), 100),
+                new AccountStatement(today.AddDays(2), 100, 200),
+                new AccountStatement(today.AddDays(1), -100, 100),
+                new AccountStatement(today, 200, 200)
             };
-            transactions.GetAll().Returns(noTransactions);
+            transactions.GetStatements().Returns(statements);
             var bankingService = new BankingService(transactions);
 
             var balance = bankingService.PrintBalance();

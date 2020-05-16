@@ -6,5 +6,6 @@ namespace Banking
     {
         void Add(ITransaction transaction);
         IEnumerable<ITransaction> GetAll();
+        List<AccountStatement> GetStatements();
     }
 }
