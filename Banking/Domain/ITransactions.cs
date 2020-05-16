@@ -5,6 +5,6 @@ namespace Banking
     public interface ITransactions
     {
         void Add(ITransaction transaction);
-        List<ITransaction> GetAll();
+        IEnumerable<ITransaction> GetAll();
     }
 }

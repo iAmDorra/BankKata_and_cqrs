@@ -11,7 +11,7 @@ namespace Banking
             transactions.Add(transaction);
         }
 
-        public List<ITransaction> GetAll()
+        public IEnumerable<ITransaction> GetAll()
         {
             return new List<ITransaction>(transactions);
         }
