@@ -4,16 +4,16 @@ namespace Banking
 {
     public class Balance
     {
-        private List<AccountStatement> statements;
+        private IEnumerable<AccountStatement> statements;
 
-        public Balance(List<AccountStatement> statements)
+        public Balance(IEnumerable<AccountStatement> statements)
         {
             this.statements = statements;
         }
 
         public List<AccountStatement> GetAccountStatements()
         {
-            return statements;
+            return new List<AccountStatement>(statements);
         }
     }
 }
