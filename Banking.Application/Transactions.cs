@@ -6,7 +6,7 @@ namespace Banking.Application
     public class Transactions : ITransactions
     {
         private List<ITransaction> transactions = new List<ITransaction>();
-        public event EventHandler AddEvent;
+        public event EventHandler<TransactionEventArgs> AddEvent;
 
         public void Add(ITransaction transaction)
         {
