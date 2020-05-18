@@ -11,12 +11,22 @@ namespace Banking.Application
         public void Add(ITransaction transaction)
         {
             transactions.Add(transaction);
-            AddEvent?.Invoke(null, null);
+            AddEvent?.Invoke(this, new TransactionEventArgs(transaction));
         }
 
         public IEnumerable<ITransaction> GetAll()
         {
             return new List<ITransaction>(transactions);
         }
+    }
+
+    public class TransactionEventArgs : EventArgs
+    {
+        public TransactionEventArgs(ITransaction transaction)
+        {
+            Transaction = transaction;
+        }
+
+        public ITransaction Transaction { get; private set; }
     }
 }
