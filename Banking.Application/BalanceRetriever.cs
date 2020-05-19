@@ -17,7 +17,7 @@ namespace Banking.Application
         private void HandleAddTransactionEvent(object sender, TransactionEventArgs e)
         {
             var transaction = e.Transaction;
-            balance += transaction.Amount;
+            balance = transaction.AddBalanceToAmount(balance);
             statements.Add(new AccountStatement(transaction.Date, transaction.Amount, balance));
         }
 

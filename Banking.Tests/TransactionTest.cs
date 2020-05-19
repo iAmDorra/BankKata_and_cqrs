@@ -73,5 +73,27 @@ namespace Banking.Tests
             var transactionEventArgs = eventArgs as TransactionEventArgs;
             Check.That(transactionEventArgs.Transaction).IsEqualTo(deposit);
         }
+
+        [TestMethod]
+        public void ShouldAddTheAmountOfDepositToTheBalanceValue()
+        {
+            DateTime today = DateTime.Now;
+            uint amount = 200;
+            var deposit = new Deposit(today, amount);
+            int balance = 0;
+            var newBalanceValue =  deposit.AddBalanceToAmount(balance);
+            Check.That(newBalanceValue).IsEqualTo(balance + amount);
+        }
+
+        [TestMethod]
+        public void ShouldAddTheAmountOfWithdrawToTheBalanceValue()
+        {
+            DateTime today = DateTime.Now;
+            uint amount = 200;
+            var deposit = new Withdraw(today, amount);
+            int balance = 0;
+            var newBalanceValue = deposit.AddBalanceToAmount(balance);
+            Check.That(newBalanceValue).IsEqualTo(balance - amount);
+        }
     }
 }

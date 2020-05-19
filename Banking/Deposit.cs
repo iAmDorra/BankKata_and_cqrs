@@ -15,5 +15,10 @@ namespace Banking
         public DateTime Date { get; }
 
         public int Amount => (int)amount;
+
+        public int AddBalanceToAmount(int balance)
+        {
+            return (int)amount + balance;
+        }
     }
 }

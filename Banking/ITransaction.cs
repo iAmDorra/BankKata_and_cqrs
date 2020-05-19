@@ -6,5 +6,7 @@ namespace Banking
     {
         DateTime Date { get; }
         int Amount { get; }
+
+        int AddBalanceToAmount(int balance);
     }
 }
