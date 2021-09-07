@@ -16,3 +16,6 @@
 
 # Idea
 Refactoring to implement CQRS pattern
+
+Related article :
+[Du code legacy vers CQRS, est-ce possible ?](https://www.arolla.fr/blog/2021/09/du-code-legacy-vers-cqrs-est-ce-possible/)
